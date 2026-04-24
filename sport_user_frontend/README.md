@@ -94,3 +94,7 @@ pnpm lint
 - 仓库主页：[../README.md](../README.md)
 - 后端说明：[../sport_backed/README.md](../sport_backed/README.md)
 - 管理端说明：[../sport_admin_frontend/README.md](../sport_admin_frontend/README.md)
+
+## License
+
+本模块遵循仓库根目录中的 [MIT License](../LICENSE)。

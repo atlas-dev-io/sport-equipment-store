@@ -97,3 +97,7 @@ sport_backed/settings.py
 - 仓库主页：[../README.md](../README.md)
 - 用户端：[../sport_user_frontend/README.md](../sport_user_frontend/README.md)
 - 管理端：[../sport_admin_frontend/README.md](../sport_admin_frontend/README.md)
+
+## License
+
+本模块遵循仓库根目录中的 [MIT License](../LICENSE)。

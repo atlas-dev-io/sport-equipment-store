@@ -97,3 +97,7 @@ The project expects a working local MySQL database before startup.
 - Repository root: [../README_EN.md](../README_EN.md)
 - User client: [../sport_user_frontend/README_EN.md](../sport_user_frontend/README_EN.md)
 - Admin client: [../sport_admin_frontend/README_EN.md](../sport_admin_frontend/README_EN.md)
+
+## License
+
+This module follows the [MIT License](../LICENSE) defined at the repository root.

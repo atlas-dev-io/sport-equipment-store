@@ -120,4 +120,4 @@ pnpm dev
 
 ## License
 
-No dedicated open-source license file is included yet. Add a `LICENSE` file before public redistribution.
+This project is licensed under the [MIT License](./LICENSE).

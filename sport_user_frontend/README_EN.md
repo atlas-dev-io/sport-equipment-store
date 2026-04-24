@@ -94,3 +94,7 @@ pnpm lint
 - Repository root: [../README_EN.md](../README_EN.md)
 - Backend docs: [../sport_backed/README_EN.md](../sport_backed/README_EN.md)
 - Admin client docs: [../sport_admin_frontend/README_EN.md](../sport_admin_frontend/README_EN.md)
+
+## License
+
+This module follows the [MIT License](../LICENSE) defined at the repository root.
