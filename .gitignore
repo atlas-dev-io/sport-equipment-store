@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+env/
+venv/
+*.egg-info/
+*.dist-info/
+*.log
+*.sqlite3
+db.sqlite3
+
+# Django
+*.sqlite3
+db.sqlite3
+/media/
+*.pot
+*.mo
+*.log
+
+# Node.js
+node_modules/
+.pnp/
+.pnp.js
+pnpm-lock.yaml
+npm-debug.log
+yarn-error.log
+.env
+package-lock.json
+
+# Vue
+/dist/
+public/static/
+/node_modules/
+
+# Ubuntu
+*.bak
+*.swp
+*~
+.DS_Store
+
+# VSCode
+.vscode/
+.editorconfig
+.prettierrc.json
+.oxlintrc.json
+*.code-workspace
+
+# System
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
+*.out
+*.err
+*.pid
+*.trace
+*.gz
+
+# JetBrains IDEs
+.idea/
