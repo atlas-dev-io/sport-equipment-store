@@ -23,7 +23,6 @@ db.sqlite3
 node_modules/
 .pnp/
 .pnp.js
-pnpm-lock.yaml
 npm-debug.log
 yarn-error.log
 .env
@@ -42,9 +41,6 @@ public/static/
 
 # VSCode
 .vscode/
-.editorconfig
-.prettierrc.json
-.oxlintrc.json
 *.code-workspace
 
 # System
