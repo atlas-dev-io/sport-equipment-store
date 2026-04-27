@@ -115,7 +115,7 @@ class LogoutController(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        AuthService.logout(request.user)
+        AuthService.logout(request.user, request.auth)
         return Response(
             {
                 "code": 200,

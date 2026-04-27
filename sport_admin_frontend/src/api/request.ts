@@ -13,7 +13,7 @@ request.interceptors.request.use(
     const token = adminUserStore.token
 
     if (token) {
-      config.headers.Authorization = `Token ${token}`
+      config.headers.Authorization = `Bearer ${token}`
     }
 
     return config

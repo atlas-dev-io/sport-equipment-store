@@ -1,7 +1,12 @@
-from django.contrib.auth import authenticate
-from django.db import transaction
-from rest_framework.authtoken.models import Token
+from datetime import datetime, timezone
 
+from django.contrib.auth import authenticate
+from django.core.cache import cache
+from django.db import transaction
+from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
+from rest_framework_simplejwt.tokens import RefreshToken
+
+from users.authentication import get_blacklisted_access_token_cache_key
 from users.repositories.user_repository import UserRepository
 
 
@@ -37,12 +42,13 @@ class AuthService:
             nickname=nickname,
             phone=phone,
         )
-        token, _ = Token.objects.get_or_create(user=user)
+        refresh = RefreshToken.for_user(user)
 
         return {
             "user_id": user.id,
             "username": user.username,
-            "token": token.key,
+            "token": str(refresh.access_token),
+            "refresh_token": str(refresh),
         }
 
     @staticmethod
@@ -54,12 +60,13 @@ class AuthService:
         if not user.is_active:
             raise ValueError("用户已被禁用")
 
-        token, _ = Token.objects.get_or_create(user=user)
+        refresh = RefreshToken.for_user(user)
 
         return {
             "user_id": user.id,
             "username": user.username,
-            "token": token.key,
+            "token": str(refresh.access_token),
+            "refresh_token": str(refresh),
         }
 
     @staticmethod
@@ -92,6 +99,17 @@ class AuthService:
         }
 
     @staticmethod
-    def logout(user):
-        Token.objects.filter(user=user).delete()
+    def logout(user, validated_token=None):
+        if validated_token:
+            jti = validated_token.get("jti")
+            exp = validated_token.get("exp")
+
+            if jti and exp:
+                expires_at = datetime.fromtimestamp(exp, tz=timezone.utc)
+                ttl = max(int((expires_at - datetime.now(timezone.utc)).total_seconds()), 1)
+                cache.set(get_blacklisted_access_token_cache_key(jti), True, timeout=ttl)
+
+        for outstanding_token in OutstandingToken.objects.filter(user=user):
+            BlacklistedToken.objects.get_or_create(token=outstanding_token)
+
         return True

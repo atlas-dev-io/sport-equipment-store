@@ -23,7 +23,7 @@ request.interceptors.request.use(
     const token = userStore.token
 
     if (token) {
-      config.headers.Authorization = `Token ${token}`
+      config.headers.Authorization = `Bearer ${token}`
     }
 
     return config
