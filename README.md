@@ -44,9 +44,11 @@ sport/
 ### 1. 启动后端
 
 ```bash
+conda activate sport
 cd sport_backed
+cp .env.example .env
+# 按需修改 .env 中的密钥和数据库配置
 pip install -r requirements.txt
-python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
@@ -99,8 +101,10 @@ pnpm dev
 
 - 当前支付流程为模拟支付，不接入真实支付网关。
 - 当前物流流程为模拟发货与物流信息维护。
-- 后端数据库配置默认写在 `sport_backed/sport_backed/settings.py`。
+- 后端敏感配置和数据库连接参数统一放在 `sport_backed/.env`。
+- 后端接口认证已切换为 JWT，鉴权请求需使用 `Authorization: Bearer <token>`。
 - 推荐模块当前为规则版 MVP，不是机器学习推荐系统。
+- 后端可通过 `cd sport_backed && python manage.py test` 运行测试。
 
 ## 文档导航
 
@@ -114,8 +118,8 @@ pnpm dev
 - [x] 电商核心流程打通
 - [x] 用户端与管理端页面实现
 - [x] 推荐与看板模块接入
+- [x] 配置文件环境变量化
 - [ ] 测试与部署文档进一步完善
-- [ ] 配置文件环境变量化
 
 ## License
 

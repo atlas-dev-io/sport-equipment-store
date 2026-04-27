@@ -85,6 +85,7 @@ pnpm lint
 ## Notes
 
 - The current UX is mainly mobile-oriented.
+- After login, the client stores the backend-issued access token locally and sends it as `Authorization: Bearer <token>`.
 - Payments are mock payments.
 - Recommendations are rule-based.
 - A few scaffold pages are still present and can be cleaned up later.

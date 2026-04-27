@@ -44,9 +44,11 @@ sport/
 ### 1. Start the backend
 
 ```bash
+conda activate sport
 cd sport_backed
+cp .env.example .env
+# update secrets and database settings in .env before first run
 pip install -r requirements.txt
-python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
@@ -100,8 +102,10 @@ pnpm dev
 
 - Payments are mock payments only.
 - Logistics are simulated shipping/info management only.
-- The database configuration is currently defined in `sport_backed/sport_backed/settings.py`.
+- Sensitive backend settings and database credentials now live in `sport_backed/.env`.
+- Backend authentication now uses JWT, and authenticated requests should send `Authorization: Bearer <token>`.
 - The recommendation module is currently a rule-based MVP instead of a machine-learning recommender.
+- Backend tests can be run with `cd sport_backed && python manage.py test`.
 
 ## Documentation
 
@@ -115,8 +119,8 @@ pnpm dev
 - [x] Core e-commerce workflow
 - [x] User and admin interfaces
 - [x] Recommendation and dashboard modules
+- [x] Environment-based configuration
 - [ ] Better testing and deployment docs
-- [ ] Environment-based configuration
 
 ## License
 

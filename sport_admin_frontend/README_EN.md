@@ -88,6 +88,7 @@ pnpm lint
 
 ## Notes
 
+- After login, the client stores the backend-issued access token locally and sends it as `Authorization: Bearer <token>`.
 - Shipping and refund actions depend on backend order APIs.
 - Charts are rendered with `ECharts`.
 - The interface is primarily desktop-oriented.

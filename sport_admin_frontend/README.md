@@ -89,6 +89,7 @@ pnpm lint
 
 ## 当前实现说明
 
+- 登录后会把后端返回的 access token 保存在本地，并在接口请求中携带 `Authorization: Bearer <token>`。
 - 发货、退款等业务依赖后端订单接口。
 - 图表使用 `ECharts` 渲染。
 - 页面以桌面端管理系统交互为主。

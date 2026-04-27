@@ -12,7 +12,9 @@
 
 - `Django`
 - `Django REST Framework`
+- `djangorestframework-simplejwt`
 - `PyMySQL`
+- `python-dotenv`
 - `django-cors-headers`
 - `drf-yasg`
 
@@ -28,6 +30,7 @@ sport_backed/
 ├─ recommend/   # browse history, favorites, recommendations
 ├─ dashboard/   # admin dashboard analytics
 ├─ sport_backed/# project settings
+├─ .env.example # environment variable example
 ├─ manage.py
 └─ requirements.txt
 ```
@@ -60,6 +63,7 @@ sport_backed/
 
 - Python 3.11+
 - MySQL 8+
+- The existing `sport` conda environment is the recommended local environment
 
 ### Install
 
@@ -70,27 +74,32 @@ pip install -r requirements.txt
 ### Migrate and Run
 
 ```bash
-python manage.py makemigrations
+cp .env.example .env
+# update DJANGO_SECRET_KEY and DB_* values as needed
 python manage.py migrate
 python manage.py runserver
 ```
 
 ## Configuration Notes
 
-The default database configuration is currently defined in:
+Runtime configuration is loaded from:
 
 ```text
-sport_backed/settings.py
+sport_backed/.env
 ```
 
-The project expects a working local MySQL database before startup.
+The default variables include `DJANGO_SECRET_KEY`, `DJANGO_DEBUG`, `DJANGO_ALLOWED_HOSTS`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, and `DB_PORT`.
+
+The project expects a working local MySQL database before startup. When you run `python manage.py test` without explicitly setting `DB_ENGINE`, the test suite automatically falls back to SQLite.
 
 ## Implementation Notes
 
-- Authentication currently uses token auth.
+- Authentication now uses JWT, and authenticated requests should send `Authorization: Bearer <access_token>`.
+- The register and login APIs return both `token` (access token) and `refresh_token`.
+- Logout immediately revokes the current access token and blacklists the user's issued refresh tokens.
 - Payments are mock payments only.
 - Recommendations are currently rule-based.
-- `tests.py` files are present and can be expanded with automated tests.
+- Automated auth coverage now includes register, login, current-user lookup, and post-logout token revocation.
 
 ## Related Docs
 

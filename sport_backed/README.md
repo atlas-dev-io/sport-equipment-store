@@ -12,7 +12,9 @@
 
 - `Django`
 - `Django REST Framework`
+- `djangorestframework-simplejwt`
 - `PyMySQL`
+- `python-dotenv`
 - `django-cors-headers`
 - `drf-yasg`
 
@@ -28,6 +30,7 @@ sport_backed/
 ├─ recommend/   # 浏览记录、收藏、推荐
 ├─ dashboard/   # 管理端统计与图表数据
 ├─ sport_backed/# 项目配置
+├─ .env.example # 环境变量示例
 ├─ manage.py
 └─ requirements.txt
 ```
@@ -60,6 +63,7 @@ sport_backed/
 
 - Python 3.11+
 - MySQL 8+
+- 推荐使用 `conda activate sport`
 
 ### 安装依赖
 
@@ -70,27 +74,32 @@ pip install -r requirements.txt
 ### 数据库迁移与启动
 
 ```bash
-python manage.py makemigrations
+cp .env.example .env
+# 按需修改 DJANGO_SECRET_KEY、DB_* 等配置
 python manage.py migrate
 python manage.py runserver
 ```
 
 ## 配置说明
 
-默认数据库配置写在：
+后端运行配置通过以下文件加载：
 
 ```text
-sport_backed/settings.py
+sport_backed/.env
 ```
 
-当前项目默认使用 MySQL，本地运行前请先确保数据库已创建并且账号可用。
+默认变量包括 `DJANGO_SECRET_KEY`、`DJANGO_DEBUG`、`DJANGO_ALLOWED_HOSTS`、`DB_NAME`、`DB_USER`、`DB_PASSWORD`、`DB_HOST`、`DB_PORT`。
+
+当前项目默认使用 MySQL，本地运行前请先确保数据库已创建并且账号可用。执行 `python manage.py test` 时，如果没有额外指定 `DB_ENGINE`，测试会自动切到 SQLite。
 
 ## 当前实现说明
 
-- 认证方式当前为 Token 认证。
+- 认证方式当前为 JWT，鉴权请求头格式为 `Authorization: Bearer <access_token>`。
+- 登录和注册接口会返回 `token`（access token）与 `refresh_token`。
+- 退出登录会立即吊销当前 access token，并拉黑该用户已签发的 refresh token。
 - 支付流程当前为模拟支付。
 - 推荐流程当前为规则版推荐。
-- `tests.py` 已预留，但自动化测试仍可继续补充。
+- 当前已覆盖注册、登录、获取当前用户、退出登录后的 token 失效等认证测试。
 
 ## 相关文档
 
