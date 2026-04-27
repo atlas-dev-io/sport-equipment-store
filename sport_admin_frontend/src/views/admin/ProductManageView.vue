@@ -128,7 +128,7 @@
 
 <script setup lang="ts">
 import { h, onMounted, reactive, ref } from 'vue'
-import { NButton, NPopconfirm, useMessage, type FormInst } from 'naive-ui'
+import { NButton, NPopconfirm, useMessage, type FormInst, type FormRules } from 'naive-ui'
 import {
   createProductApi,
   deleteProductApi,
@@ -181,12 +181,12 @@ const form = reactive({
   is_recommend: false,
 })
 
-const rules = {
+const rules: FormRules = {
   name: { required: true, message: '请输入商品名称', trigger: ['blur', 'input'] },
   sku: { required: true, message: '请输入SKU', trigger: ['blur', 'input'] },
-  category: { required: true, type: 'number', message: '请选择分类', trigger: ['change'] },
-  price: { required: true, type: 'number', message: '请输入销售价', trigger: ['blur', 'input'] },
-  stock: { required: true, type: 'number', message: '请输入库存', trigger: ['blur', 'input'] },
+  category: { required: true, type: 'number' as const, message: '请选择分类', trigger: ['change'] },
+  price: { required: true, type: 'number' as const, message: '请输入销售价', trigger: ['blur', 'input'] },
+  stock: { required: true, type: 'number' as const, message: '请输入库存', trigger: ['blur', 'input'] },
   status: { required: true, message: '请选择状态', trigger: ['change'] },
 }
 

@@ -177,6 +177,7 @@ import {
   useMessage,
   type DataTableColumns,
   type FormInst,
+  type FormRules,
 } from 'naive-ui'
 import {
   adjustInventoryApi,
@@ -236,7 +237,7 @@ const adjustForm = reactive({
   remark: '',
 })
 
-const adjustRules = {
+const adjustRules: FormRules = {
   change_type: {
     required: true,
     message: '请选择调整类型',
@@ -244,7 +245,7 @@ const adjustRules = {
   },
   quantity: {
     required: true,
-    type: 'number',
+    type: 'number' as const,
     message: '请输入调整数量',
     trigger: ['blur', 'input'],
   },
@@ -257,10 +258,10 @@ const warningForm = reactive({
   low_stock_warning: 10 as number | null,
 })
 
-const warningRules = {
+const warningRules: FormRules = {
   low_stock_warning: {
     required: true,
-    type: 'number',
+    type: 'number' as const,
     message: '请输入低库存预警值',
     trigger: ['blur', 'input'],
   },
