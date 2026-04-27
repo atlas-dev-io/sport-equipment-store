@@ -80,6 +80,18 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+### Import demo data
+
+```bash
+mysql -u <DB_USER> -p <DB_NAME> < sql/seed_demo_data.sql
+```
+
+- `sql/seed_demo_data.sql` is intended for a migrated MySQL development database.
+- It inserts 9 demo accounts: 3 customers, 3 merchants, and 3 admins.
+- Every seeded account uses the default password `123456`.
+- It also loads 5 products, 5 orders, and linked categories, product images, inventory logs, payments, carts, favorites, browse history, and recommendation logs.
+- Product image URLs use Alibaba CDN domains that are suitable for mainland China access.
+
 ## Configuration Notes
 
 Runtime configuration is loaded from:
@@ -97,6 +109,10 @@ The project expects a working local MySQL database before startup. When you run 
 - Authentication now uses JWT, and authenticated requests should send `Authorization: Bearer <access_token>`.
 - The register and login APIs return both `token` (access token) and `refresh_token`.
 - Logout immediately revokes the current access token and blacklists the user's issued refresh tokens.
+- Login-ready accounts from the demo SQL:
+- Customers: `customer_chen`, `customer_li`, `customer_wang`
+- Merchants: `merchant_power`, `merchant_yoga`, `merchant_outdoor`
+- Admins: `admin_ops`, `admin_supply`, `admin_super`
 - Payments are mock payments only.
 - Recommendations are currently rule-based.
 - Automated auth coverage now includes register, login, current-user lookup, and post-logout token revocation.

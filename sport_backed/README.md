@@ -80,6 +80,18 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+### 导入演示数据
+
+```bash
+mysql -u <DB_USER> -p <DB_NAME> < sql/seed_demo_data.sql
+```
+
+- `sql/seed_demo_data.sql` 适用于已经执行过迁移的 MySQL 开发库。
+- 文件会写入 9 个演示账号：3 个普通用户、3 个商家、3 个管理员。
+- 所有演示账号默认密码均为 `123456`。
+- 同时会补齐 5 条商品、5 条订单，以及分类、商品图片、库存日志、支付记录、购物车、收藏、浏览记录、推荐日志等关联数据。
+- 商品图片链接使用阿里系 CDN 域名，适合中国大陆网络环境。
+
 ## 配置说明
 
 后端运行配置通过以下文件加载：
@@ -97,6 +109,10 @@ sport_backed/.env
 - 认证方式当前为 JWT，鉴权请求头格式为 `Authorization: Bearer <access_token>`。
 - 登录和注册接口会返回 `token`（access token）与 `refresh_token`。
 - 退出登录会立即吊销当前 access token，并拉黑该用户已签发的 refresh token。
+- 演示 SQL 中可直接登录的账号：
+- 普通用户：`customer_chen`、`customer_li`、`customer_wang`
+- 商家：`merchant_power`、`merchant_yoga`、`merchant_outdoor`
+- 管理员：`admin_ops`、`admin_supply`、`admin_super`
 - 支付流程当前为模拟支付。
 - 推荐流程当前为规则版推荐。
 - 当前已覆盖注册、登录、获取当前用户、退出登录后的 token 失效等认证测试。

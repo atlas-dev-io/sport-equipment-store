@@ -82,10 +82,13 @@ pnpm lint
 
 > 请先启动 `sport_backed`，再启动当前前端项目。
 
+> 如果需要可直接登录的演示数据，可先导入 `../sport_backed/sql/seed_demo_data.sql`。
+
 ## 当前实现说明
 
 - 当前项目更偏移动端 H5 体验。
 - 登录后会把后端返回的 access token 保存在本地，并在接口请求中携带 `Authorization: Bearer <token>`。
+- 演示普通用户账号：`customer_chen`、`customer_li`、`customer_wang`，默认密码均为 `123456`。
 - 支付流程为模拟支付。
 - 推荐模块为规则版推荐。
 - 代码中保留了少量脚手架页面，可按需要继续清理。

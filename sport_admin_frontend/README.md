@@ -86,10 +86,13 @@ pnpm lint
 - `merchant`：可访问商品、库存、订单、看板
 - 非授权用户：跳转到登录页或 `403`
 
+> 建议先导入 `../sport_backed/sql/seed_demo_data.sql`，再使用管理端账号登录。
 
 ## 当前实现说明
 
 - 登录后会把后端返回的 access token 保存在本地，并在接口请求中携带 `Authorization: Bearer <token>`。
+- 演示商家账号：`merchant_power`、`merchant_yoga`、`merchant_outdoor`，默认密码 `123456`。
+- 演示管理员账号：`admin_ops`、`admin_supply`、`admin_super`，默认密码 `123456`。
 - 发货、退款等业务依赖后端订单接口。
 - 图表使用 `ECharts` 渲染。
 - 页面以桌面端管理系统交互为主。

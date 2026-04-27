@@ -82,10 +82,13 @@ pnpm lint
 
 > Start `sport_backed` before running this frontend.
 
+> If you want login-ready demo data, import `../sport_backed/sql/seed_demo_data.sql` first.
+
 ## Notes
 
 - The current UX is mainly mobile-oriented.
 - After login, the client stores the backend-issued access token locally and sends it as `Authorization: Bearer <token>`.
+- Demo customer accounts: `customer_chen`, `customer_li`, `customer_wang`. The default password for all of them is `123456`.
 - Payments are mock payments.
 - Recommendations are rule-based.
 - A few scaffold pages are still present and can be cleaned up later.

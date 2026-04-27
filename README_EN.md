@@ -53,6 +53,16 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+### 1.1 Import demo data (optional)
+
+```bash
+cd sport_backed
+mysql -u <DB_USER> -p <DB_NAME> < sql/seed_demo_data.sql
+```
+
+- `sport_backed/sql/seed_demo_data.sql` loads 3 customer accounts, 3 merchant accounts, 3 admin accounts, 5 products, 5 orders, plus linked categories, payments, carts, favorites, browse history, and recommendation logs.
+- Every seeded account uses the default password `123456`.
+
 
 ### 2. Start the user client
 
@@ -104,6 +114,7 @@ pnpm dev
 - Logistics are simulated shipping/info management only.
 - Sensitive backend settings and database credentials now live in `sport_backed/.env`.
 - Backend authentication now uses JWT, and authenticated requests should send `Authorization: Bearer <token>`.
+- The repository also ships a MySQL demo seed file at `sport_backed/sql/seed_demo_data.sql`, and its product images use Alibaba CDN URLs that are suitable for mainland China access.
 - The recommendation module is currently a rule-based MVP instead of a machine-learning recommender.
 - Backend tests can be run with `cd sport_backed && python manage.py test`.
 

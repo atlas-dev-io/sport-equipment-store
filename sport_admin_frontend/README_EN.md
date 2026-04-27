@@ -86,9 +86,13 @@ pnpm lint
 - `merchant`: access to products, inventory, orders, and dashboard
 - unauthorized users: redirected to login or `403`
 
+> Import `../sport_backed/sql/seed_demo_data.sql` first if you want ready-to-use admin and merchant accounts.
+
 ## Notes
 
 - After login, the client stores the backend-issued access token locally and sends it as `Authorization: Bearer <token>`.
+- Demo merchant accounts: `merchant_power`, `merchant_yoga`, `merchant_outdoor`, all using password `123456`.
+- Demo admin accounts: `admin_ops`, `admin_supply`, `admin_super`, all using password `123456`.
 - Shipping and refund actions depend on backend order APIs.
 - Charts are rendered with `ECharts`.
 - The interface is primarily desktop-oriented.

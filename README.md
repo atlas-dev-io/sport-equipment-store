@@ -53,6 +53,16 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+### 1.1 导入演示数据（可选）
+
+```bash
+cd sport_backed
+mysql -u <DB_USER> -p <DB_NAME> < sql/seed_demo_data.sql
+```
+
+- `sport_backed/sql/seed_demo_data.sql` 会写入 3 个普通用户、3 个商家、3 个管理员、5 条商品、5 条订单，以及分类、支付、购物车、收藏、浏览记录、推荐日志等关联数据。
+- 演示账号默认密码统一为 `123456`。
+
 ### 2. 启动用户端
 
 ```bash
@@ -103,6 +113,7 @@ pnpm dev
 - 当前物流流程为模拟发货与物流信息维护。
 - 后端敏感配置和数据库连接参数统一放在 `sport_backed/.env`。
 - 后端接口认证已切换为 JWT，鉴权请求需使用 `Authorization: Bearer <token>`。
+- 仓库提供 MySQL 演示数据文件 `sport_backed/sql/seed_demo_data.sql`，商品图片使用阿里系 CDN URL，适合中国大陆网络环境。
 - 推荐模块当前为规则版 MVP，不是机器学习推荐系统。
 - 后端可通过 `cd sport_backed && python manage.py test` 运行测试。
 
